@@ -1,0 +1,25 @@
+[package]
+name = "agent-print-session-cli"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Read and summarize local Claude, Codex, and Pi session transcripts"
+
+[[bin]]
+name = "agent-print-session"
+path = "src/main.rs"
+
+[dependencies]
+agent-parser = { path = "../agent-parser" }
+cli-command-kit = { path = "../cli-command-kit" }
+clap = { version = "4.6.7", features = ["string"] }
+clap_complete = "4.6.5"
+dirs = "7.0.0"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+textwrap = "0.16.4"
+thiserror = "2.0.18"
+walkdir = "2.5.0"
+
+[dev-dependencies]
+tempfile = "3.27.0"

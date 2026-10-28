@@ -13,13 +13,13 @@ Read-only transcript discovery and rendering for Claude Code, Codex, and Pi. The
 - Build: `just build` produces `bin/agent-print-session`.
 - Run: `just run <args>` or `just run-ai <args>`.
 - Test: `just test`.
-- Format: `just fmt`; this selects this package and preserves sibling sources.
+- Format: `just fmt`; this selects this package.
 - Check: `just check` runs format validation, strict Clippy, tests, and the 90% line coverage floor. Requires `cargo-llvm-cov` and `llvm-tools-preview`.
 
 ## Contracts
 
-- Use native Clap commands and the sibling `cli-command-kit`; keep subject-first harness commands and generated help/completion. Shorthand `<harness> <target>` and `<harness> --path <file>` select print.
-- Use the sibling `agent-parser` stateful native parsers. Skip malformed/unrelated records, propagate file I/O failures, and reject lines beyond 10 MiB. Never modify transcript files or their directories.
+- Use native Clap commands and the revision-pinned `cli-command-kit` Git dependency; keep subject-first harness commands and generated help/completion. Shorthand `<harness> <target>` and `<harness> --path <file>` select print.
+- Use the revision-pinned `agent-parser` Git dependency stateful native parsers. Skip malformed/unrelated records, propagate file I/O failures, and reject lines beyond 10 MiB. Never modify transcript files or their directories.
 - Search each configured directory recursively in priority order. Rank exact/suffix matches before delimited/prefix matches before substrings, retaining lexical order for ties. Do not follow directory symlinks.
 - Preserve full output by default in both modes. Handoff precedes summary; last-turn selection precedes the errors/files/tools/prompts filter precedence, which precedes pagination. A reducing positive limit precedes tail. Summary and handoff aggregate the entire session.
 - Correlate tool results by call ID for error counts and handoff output. Native diff deletion type is `del`. Preserve unwrapped agent context and propagate every output-write failure.
